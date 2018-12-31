@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     static final String PHOTO_TAP_TOAST_STRING = "Photo Tap! X: %.2f %% Y:%.2f %% ID: %d";
     static final String SCALE_TOAST_STRING = "Scaled to: %.2ff";
 
-    private TextView mCurrMatrixTv;
 
     private PhotoViewAttacher mAttacher;
 
@@ -26,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
     private Matrix mCurrentDisplayMatrix = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
         ImageView mImageView = (ImageView) findViewById(R.id.iv_test);
-        mCurrMatrixTv = (TextView) findViewById(R.id.tv_current_matrix);
 
         Drawable bitmap = getResources().getDrawable(R.drawable.map);
         mImageView.setImageDrawable(bitmap);
@@ -49,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
             float xPercentage = x * 100f;
             float yPercentage = y * 100f;
 
-            float X_LOC=xPercentage*480/100;
-            float Y_LOC=xPercentage*480/100;
+            float X_LOC=xPercentage;
+            float Y_LOC=xPercentage;
 
             showToast(String.format(PHOTO_TAP_TOAST_STRING, X_LOC, Y_LOC, view == null ? 0 : view.getId()));
         }
@@ -67,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onMatrixChanged(RectF rect) {
-            mCurrMatrixTv.setText(rect.toString());
         }
     }
 
