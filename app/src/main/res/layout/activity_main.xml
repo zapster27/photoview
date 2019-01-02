@@ -14,5 +14,21 @@
         android:layout_marginLeft="40dp"
         />
 
+    <com.github.anastr.speedviewlib.AwesomeSpeedometer
+        android:id="@+id/awesomeSpeedometer"
+        android:layout_width="1080px"
+        android:layout_height="1080px"
+        android:layout_toRightOf="@id/iv_test"
+        android:layout_centerVertical="true"
+        app:sv_maxSpeed="4"
+        app:sv_backgroundCircleColor="@color/background"
+        app:sv_textColor="#1F292E"
+        app:sv_textSize="20dp"
+        app:sv_speedTextColor="#1F292E"
+        app:sv_speedTextSize="70dp"
+        app:sv_unitTextColor="#1F292E"
+        app:sv_unitTextSize="50dp"
+        app:sv_tickNumber="5"
+        />
 
 </RelativeLayout>
