@@ -3,14 +3,26 @@ package com.example.tilan.photoviewtest;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -44,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         mAttacher.setOnMatrixChangeListener(new MatrixChangeListener());
         mAttacher.setOnPhotoTapListener(new PhotoTapListener());
 
+        yourDataTask f=new yourDataTask();
+        f.execute();
+
     }
     private class PhotoTapListener implements PhotoViewAttacher.OnPhotoTapListener{
 
@@ -72,5 +87,68 @@ public class MainActivity extends AppCompatActivity {
         public void onMatrixChanged(RectF rect) {
         }
     }
+    private class yourDataTask extends AsyncTask<Void, Void, JSONArray>
+    {
+        @Override
+        protected JSONArray doInBackground(Void... params)
+        {
 
+            String str="http://10.10.28.56/select.php";
+            URLConnection urlConn = null;
+            BufferedReader bufferedReader = null;
+            try
+            {
+                URL url = new URL(str);
+                urlConn = url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+
+                StringBuffer stringBuffer = new StringBuffer();
+                String line;
+                while ((line = bufferedReader.readLine()) != null)
+                {
+                    stringBuffer.append(line);
+                }
+
+                return new JSONArray(stringBuffer.toString());
+            }
+            catch(Exception ex)
+            {
+                Log.e("App", "yourDataTask", ex);
+                return null;
+            }
+            finally
+            {
+                if(bufferedReader != null)
+                {
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray response) {
+            if(response != null)
+            {
+                try {
+                    for(int i=0; i < response.length(); i++) {
+                        JSONObject jsonobject = response.getJSONObject(i);
+                        String ID       = jsonobject.getString("ID");
+                        String X_LOC    = jsonobject.getString("X_LOC");
+                        String Y_LOC  = jsonobject.getString("Y_LOC");
+                        String SPD = jsonobject.getString("SPD");
+                        Log.d("App",  X_LOC);
+                    }
+
+                } catch (JSONException ex) {
+                    Log.e("App", "Failure", ex);
+                }
+            }
+        }
+
+
+    }
 }
