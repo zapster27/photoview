@@ -1,8 +1,16 @@
 package com.example.tilan.photoviewtest;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +31,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -42,12 +52,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                yourDataTask f=new yourDataTask();
+                f.execute();
+            }
+        },0,1000);
+
         setContentView(R.layout.activity_main);
 
         ImageView mImageView = (ImageView) findViewById(R.id.iv_test);
+        Bitmap mBitmap= BitmapFactory.decodeResource(getResources(),R.drawable.map);
+        Bitmap mutableBitmap = mBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Canvas canvas = new Canvas(mutableBitmap);
+        int size=20;
+        int Width=mBitmap.getWidth();
+        int Height=mBitmap.getHeight();
+        Paint paint=new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.RED);
+        paint.setAntiAlias(true);
+        int radius = Math.min(canvas.getWidth(),canvas.getHeight()/2);
+        int padding = 5;
+        canvas.drawCircle(1280, 1280, 20, paint );
 
-        Drawable bitmap = getResources().getDrawable(R.drawable.map);
-        mImageView.setImageDrawable(bitmap);
+
+//        Drawable bitmap = getResources().getDrawable(R.drawable.map);
+        mImageView.setImageDrawable(new BitmapDrawable(getResources(),mutableBitmap));
 
         // The MAGIC happens here!
         mAttacher = new PhotoViewAttacher(mImageView);
@@ -56,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
         mAttacher.setOnMatrixChangeListener(new MatrixChangeListener());
         mAttacher.setOnPhotoTapListener(new PhotoTapListener());
 
-        yourDataTask f=new yourDataTask();
-        f.execute();
+
 
     }
     private class PhotoTapListener implements PhotoViewAttacher.OnPhotoTapListener{
@@ -93,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         protected JSONArray doInBackground(Void... params)
         {
 
-            String str="http://10.10.28.56/select.php";
+            String str="http://10.10.6.156/select.php";
             URLConnection urlConn = null;
             BufferedReader bufferedReader = null;
             try
