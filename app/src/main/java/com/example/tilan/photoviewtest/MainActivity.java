@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,8 +17,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
-import android.widget.Toast;
 
 import com.github.anastr.speedviewlib.AwesomeSpeedometer;
 
@@ -44,7 +41,7 @@ import static java.sql.Types.NULL;
 
 
 public class MainActivity extends AppCompatActivity {
-    static final String PHOTO_TAP_TOAST_STRING = "Photo Tap! X: %.2f %% Y:%.2f %% ID: %d";
+//    static final String PHOTO_TAP_TOAST_STRING = "Photo Tap! X: %.2f %% Y:%.2f %% ID: %d";
     static final int NO_DATA = -1;
     static final int MANUAL = 1;
     static final int AUTO_NO_MAN = 0;
@@ -71,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView mImageView;
     Bitmap mutableBitmap;
     AwesomeSpeedometer SpeedMeter;
-    private PhotoViewAttacher mAttacher;
-    private Toast mCurrentToast;
+    PhotoViewAttacher mAttacher;
     FloatingActionButton manual, autoWithMan, autoNoMan;
     JoystickView js1;
 
@@ -179,10 +175,8 @@ public class MainActivity extends AppCompatActivity {
             double xPercentage = x * 100f;
             double yPercentage = y * 100f;
 
-            double X_LOC = xPercentage;
-            double Y_LOC = yPercentage;
             if (MODE != MANUAL) {
-                SendData up = new SendData(X_LOC, Y_LOC);
+                SendData up = new SendData(xPercentage, yPercentage);
                 up.execute();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -237,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         double TO_X_LOC;
         double TO_Y_LOC;
 
-        public SendData(double TO_X_LOC, double TO_Y_LOC) {
+        private SendData(double TO_X_LOC, double TO_Y_LOC) {
             this.TO_X_LOC = TO_X_LOC;
             this.TO_Y_LOC = TO_Y_LOC;
         }
