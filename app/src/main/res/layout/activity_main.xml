@@ -1,34 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
 
-    <uk.co.senab.photoview.PhotoView
-        android:id="@+id/iv_test"
-        android:layout_width="1280px"
-        android:layout_height="1280px"
-        android:scaleType="fitXY"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="40dp"
-        />
-    <com.github.anastr.speedviewlib.AwesomeSpeedometer
-        android:id="@+id/awesomeSpeedometer"
-        android:layout_width="1080px"
-        android:layout_height="1080px"
-        android:layout_toRightOf="@id/iv_test"
-        android:layout_centerVertical="true"
-        app:sv_maxSpeed="4"
-        app:sv_backgroundCircleColor="@color/background"
-        app:sv_textColor="#1F292E"
-        app:sv_textSize="20dp"
-        app:sv_speedTextColor="#1F292E"
-        app:sv_speedTextSize="70dp"
-        app:sv_unitTextColor="#1F292E"
-        app:sv_unitTextSize="50dp"
-        app:sv_tickNumber="5"
-        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
 
-</RelativeLayout>
+        <uk.co.senab.photoview.PhotoView
+            android:id="@+id/iv_test"
+            android:layout_width="1280px"
+            android:layout_height="1280px"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <com.github.anastr.speedviewlib.AwesomeSpeedometer
+                    android:id="@+id/awesomeSpeedometer"
+                    android:layout_width="700px"
+                    android:layout_height="700px"
+                    android:layout_gravity="center"
+                    android:layout_margin="40dp"
+                    android:layout_toRightOf="@id/iv_test"
+                    app:sv_backgroundCircleColor="@color/background"
+                    app:sv_maxSpeed="4"
+                    app:sv_speedTextColor="#1F292E"
+                    app:sv_speedTextSize="70dp"
+                    app:sv_textColor="#1F292E"
+                    app:sv_textSize="20dp"
+                    app:sv_tickNumber="5"
+                    app:sv_unitTextColor="#1F292E"
+                    app:sv_unitTextSize="50dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="end">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <io.github.controlwear.virtual.joystick.android.JoystickView
+                        android:visibility="invisible"
+                        android:id="@+id/js1"
+                        android:layout_width="480px"
+                        android:layout_height="480px"
+                        app:JV_backgroundColor="#009688"
+                        app:JV_borderColor="#00796B"
+                        android:layout_centerInParent="true"
+                        app:JV_buttonColor="#FF6E40"
+                        app:JV_buttonSizeRatio="15%" />
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/manual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="16dp"
+                        android:layout_above="@+id/autowithman"
+                        android:src="@drawable/manual" />
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/autowithman"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/auto_with_man"
+                        android:layout_above="@+id/autonoman"
+                        app:useCompatPadding="false" />
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/autonoman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="16dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:src="@drawable/auto_no_man"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
