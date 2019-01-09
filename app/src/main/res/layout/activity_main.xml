@@ -20,8 +20,7 @@
             android:layout_height="1280px"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
-            android:scaleType="fitXY" />
+            android:layout_marginLeft="40dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,6 +36,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/speed_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -47,9 +47,11 @@
                     android:layout_width="700px"
                     android:layout_height="700px"
                     android:layout_gravity="center"
-                    android:layout_margin="40dp"
+                    android:layout_margin="100dp"
                     android:layout_toRightOf="@id/iv_test"
+
                     app:sv_backgroundCircleColor="@color/background"
+                    app:sv_speedometerColor="#18BA0E"
                     app:sv_maxSpeed="4"
                     app:sv_speedTextColor="#1F292E"
                     app:sv_speedTextSize="70dp"
@@ -72,46 +74,104 @@
                     android:layout_height="match_parent">
 
                     <io.github.controlwear.virtual.joystick.android.JoystickView
-                        android:visibility="invisible"
                         android:id="@+id/js1"
-                        android:layout_width="480px"
-                        android:layout_height="480px"
-                        app:JV_backgroundColor="#009688"
-                        app:JV_borderColor="#00796B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        app:JV_buttonColor="#FF6E40"
-                        app:JV_buttonSizeRatio="15%" />
+                        android:visibility="invisible"
+                        app:JV_backgroundColor="@color/background"
+                        app:JV_borderColor="#000000"
+                        app:JV_buttonColor="#000000"
+                        app:JV_buttonSizeRatio="40%" />
 
                     <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/manual"
+                        android:id="@+id/menu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
                         android:layout_margin="16dp"
-                        android:layout_above="@+id/autowithman"
-                        android:src="@drawable/manual" />
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/autowithman"
-                        android:layout_width="wrap_content"
+                        android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:src="@drawable/auto_with_man"
-                        android:layout_above="@+id/autonoman"
-                        app:useCompatPadding="false" />
+                        app:fabSize="normal"
+                        android:src="@drawable/add_white"/>
 
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/autonoman"
+                    <LinearLayout
+                        android:id="@+id/manual_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_margin="16dp"
-                        android:backgroundTint="@color/colorAccent"
-                        android:src="@drawable/auto_no_man"
-                        android:layout_alignParentBottom="true"/>
+                        android:visibility="gone"
+                        android:layout_above="@+id/menu"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Manual"
+                            android:layout_gravity="center"
+                            />
+                        <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/manual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/manual"
+                            app:fabSize="mini"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/autowithman_layout"
+                        android:visibility="gone"
+                        android:layout_above="@+id/manual_layout"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Z Drive"
+                            android:layout_gravity="center"
+                            />
+                        <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/autowithman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/auto_with_man"
+                            app:fabSize="mini"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/autonoman_layout"
+                        android:visibility="gone"
+                        android:layout_above="@+id/autowithman_layout"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Driver Less"
+                            android:layout_gravity="center"
+                            />
+
+                        <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/autonoman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:src="@drawable/auto_no_man"
+                            app:fabSize="mini"/>
+
+                    </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
