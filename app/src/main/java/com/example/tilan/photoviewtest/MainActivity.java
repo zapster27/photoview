@@ -1,6 +1,7 @@
 package com.example.tilan.photoviewtest;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -87,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
     PhotoViewAttacher mAttacher;
 
-    FloatingActionButton manual, autoWithMan, autoNoMan, menu;
+    FloatingActionButton manual, autoWithMan, autoNoMan, menu, devMenu;
 
-    LinearLayout manualLayout, nomanLayout, withmanLayout, speedView;
+    LinearLayout manualLayout, nomanLayout, withmanLayout, speedView, devLayout;
 
     JoystickView js1;
 
@@ -114,10 +115,12 @@ public class MainActivity extends AppCompatActivity {
         manual = findViewById(R.id.manual);
         autoWithMan = findViewById(R.id.autowithman);
         autoNoMan = findViewById(R.id.autonoman);
+        devMenu=findViewById(R.id.dev);
 
         manualLayout = findViewById(R.id.manual_layout);
         nomanLayout = findViewById(R.id.autonoman_layout);
         withmanLayout = findViewById(R.id.autowithman_layout);
+        devLayout=findViewById(R.id.dev_layout);
 
         menu = findViewById(R.id.menu);
 
@@ -140,20 +143,45 @@ public class MainActivity extends AppCompatActivity {
                     withmanLayout.setVisibility(View.GONE);
                     nomanLayout.setVisibility(View.GONE);
                     manualLayout.setVisibility(View.GONE);
+                    devLayout.setVisibility(View.GONE);
+
                     withmanLayout.startAnimation(hideLayout);
                     nomanLayout.startAnimation(hideLayout);
                     manualLayout.startAnimation(hideLayout);
+                    devLayout.startAnimation(hideLayout);
                     menu.startAnimation(hideButtons);
                 } else {
                     withmanLayout.setVisibility(View.VISIBLE);
                     nomanLayout.setVisibility(View.VISIBLE);
                     manualLayout.setVisibility(View.VISIBLE);
+                    devLayout.setVisibility(View.VISIBLE);
+
                     withmanLayout.startAnimation(showLayout);
                     nomanLayout.startAnimation(showLayout);
                     manualLayout.startAnimation(showLayout);
+                    devLayout.startAnimation(showLayout);
                     menu.startAnimation(showButtons);
 
                 }
+            }
+        });
+        devMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                withmanLayout.setVisibility(View.GONE);
+                nomanLayout.setVisibility(View.GONE);
+                manualLayout.setVisibility(View.GONE);
+                devLayout.setVisibility(View.GONE);
+
+                withmanLayout.startAnimation(hideLayout);
+                nomanLayout.startAnimation(hideLayout);
+                manualLayout.startAnimation(hideLayout);
+                devLayout.startAnimation(hideLayout);
+
+                menu.startAnimation(hideButtons);
+
+                Intent intent=new Intent(MainActivity.this,nodeStateActivity.class);
+                startActivity(intent);
             }
         });
         autoNoMan.setOnClickListener(new View.OnClickListener() {
@@ -179,9 +207,14 @@ public class MainActivity extends AppCompatActivity {
                 withmanLayout.setVisibility(View.GONE);
                 nomanLayout.setVisibility(View.GONE);
                 manualLayout.setVisibility(View.GONE);
+                devLayout.setVisibility(View.GONE);
+
+                devLayout.startAnimation(hideLayout);
                 withmanLayout.startAnimation(hideLayout);
                 nomanLayout.startAnimation(hideLayout);
                 manualLayout.startAnimation(hideLayout);
+
+
                 menu.startAnimation(hideButtons);
             }
         });
@@ -207,6 +240,9 @@ public class MainActivity extends AppCompatActivity {
                 withmanLayout.setVisibility(View.GONE);
                 nomanLayout.setVisibility(View.GONE);
                 manualLayout.setVisibility(View.GONE);
+                devLayout.setVisibility(View.GONE);
+
+                devLayout.startAnimation(hideLayout);
                 withmanLayout.startAnimation(hideLayout);
                 nomanLayout.startAnimation(hideLayout);
                 manualLayout.startAnimation(hideLayout);
@@ -232,6 +268,9 @@ public class MainActivity extends AppCompatActivity {
                 withmanLayout.setVisibility(View.GONE);
                 nomanLayout.setVisibility(View.GONE);
                 manualLayout.setVisibility(View.GONE);
+                devLayout.setVisibility(View.GONE);
+
+                devLayout.startAnimation(hideLayout);
                 withmanLayout.startAnimation(hideLayout);
                 nomanLayout.startAnimation(hideLayout);
                 manualLayout.startAnimation(hideLayout);

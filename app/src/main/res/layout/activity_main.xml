@@ -14,13 +14,26 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <uk.co.senab.photoview.PhotoView
-            android:id="@+id/iv_test"
-            android:layout_width="1280px"
-            android:layout_height="1280px"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="40dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <uk.co.senab.photoview.PhotoView
+                android:id="@+id/iv_test"
+                android:layout_width="1280px"
+                android:layout_height="1280px"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp" />
+
+            <uk.co.senab.photoview.PhotoView
+                android:id="@+id/iv_test_top"
+                android:layout_width="1280px"
+                android:layout_height="1280px"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp" />
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -51,10 +64,10 @@
                     android:layout_toRightOf="@id/iv_test"
 
                     app:sv_backgroundCircleColor="@color/background"
-                    app:sv_speedometerColor="#18BA0E"
                     app:sv_maxSpeed="4"
                     app:sv_speedTextColor="#1F292E"
                     app:sv_speedTextSize="70dp"
+                    app:sv_speedometerColor="#18BA0E"
                     app:sv_textColor="#1F292E"
                     app:sv_textSize="20dp"
                     app:sv_tickNumber="5"
@@ -88,75 +101,73 @@
                         android:id="@+id/menu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        app:fabSize="normal"
-                        android:src="@drawable/add_white"/>
+                        android:layout_margin="16dp"
+                        android:src="@drawable/add_white"
+                        app:fabSize="normal" />
 
                     <LinearLayout
                         android:id="@+id/manual_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:visibility="gone"
                         android:layout_above="@+id/menu"
-                        >
+                        android:layout_alignParentRight="true"
+                        android:visibility="gone">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Manual"
                             android:layout_gravity="center"
-                            />
+                            android:text="Manual" />
+
                         <android.support.design.widget.FloatingActionButton
                             android:id="@+id/manual"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
                             android:src="@drawable/manual"
-                            app:fabSize="mini"/>
+                            app:fabSize="mini" />
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/autowithman_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:id="@+id/autowithman_layout"
-                        android:visibility="gone"
                         android:layout_above="@+id/manual_layout"
-                        >
+                        android:layout_alignParentRight="true"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Z Drive"
                             android:layout_gravity="center"
-                            />
+                            android:text="Z Drive" />
+
                         <android.support.design.widget.FloatingActionButton
                             android:id="@+id/autowithman"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
                             android:src="@drawable/auto_with_man"
-                            app:fabSize="mini"/>
+                            app:fabSize="mini" />
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/autonoman_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:id="@+id/autonoman_layout"
-                        android:visibility="gone"
                         android:layout_above="@+id/autowithman_layout"
-                        >
+                        android:layout_alignParentRight="true"
+                        android:visibility="gone">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Driver Less"
                             android:layout_gravity="center"
-                            />
+                            android:text="Driver Less" />
 
                         <android.support.design.widget.FloatingActionButton
                             android:id="@+id/autonoman"
@@ -165,7 +176,32 @@
                             android:layout_margin="16dp"
                             android:backgroundTint="@color/colorAccent"
                             android:src="@drawable/auto_no_man"
-                            app:fabSize="mini"/>
+                            app:fabSize="mini" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/dev_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/autonoman_layout"
+                        android:layout_alignParentRight="true"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Developper menu" />
+
+                        <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/dev"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:src="@drawable/auto_no_man"
+                            app:fabSize="mini" />
 
                     </LinearLayout>
                 </RelativeLayout>
