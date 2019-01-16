@@ -23,16 +23,15 @@ import static com.example.tilan.photoviewtest.MainActivity.IP;
 
 public class nodeStateActivity extends AppCompatActivity {
 
-    String[] mobileArray = {"Node_1","Node_2","Node_3","Node_4",
+    String[] nodeNames = {"Node_1","Node_2","Node_3","Node_4",
             "Node_5","Node_6","Node_7","Node_8"};
+    Boolean[] nodeStates={true,false,true,true,false,true,false,true};
     int NODE_STATE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_node_state);
-        ArrayAdapter adapter = new ArrayAdapter<>(this,
-                R.layout.list_item, mobileArray);
-
+        MyListAdapter adapter=new MyListAdapter(this,nodeNames,nodeStates);
         ListView listView = findViewById(R.id.nodes);
         listView.setAdapter(adapter);
     }

@@ -15,11 +15,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView mImageView;
     Bitmap mutableBitmap;
+    Bitmap toLoc;
+    Bitmap myLoc;
     Bitmap mBitmap ;
     Canvas canvas;
     AwesomeSpeedometer SpeedMeter;
@@ -128,8 +132,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         mBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.three_and_half);
+        myLoc=BitmapFactory.decodeResource(getResources(),R.drawable.myloc);
+        toLoc=BitmapFactory.decodeResource(getResources(),R.drawable.toloc);
 
         mutableBitmap = mBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
         showButtons = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_button);
         hideButtons = AnimationUtils.loadAnimation(MainActivity.this, R.anim.hide_button);
         showLayout = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout);
@@ -222,7 +229,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
-                builder2.setMessage("Are you sure you want switch to ZDrive mode?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder2.setTitle("WARNING");
+                builder2.setMessage("I agree to not hold the developers of this device responsible for, any accidents causing property damage or any damage to the rider or any personnel in the vicinity" +
+                        " of the device including loss of life.").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MODE = AUTO_WITH_MAN;
@@ -231,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                         AZIMUTH = NO_DATA;
                         new SendData(NO_DATA, NO_DATA).execute();
                     }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("No, I'm too chicken.", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -344,7 +353,8 @@ public class MainActivity extends AppCompatActivity {
         paintzeg.setColor(Color.RED);
         paintzeg.setAntiAlias(true);
         if (pmv) {
-            canvas.drawCircle((float) cx, (float) cy, 10, paintzeg);
+            canvas.drawBitmap(myLoc,(float) cx-10,(float) cy-10,null);
+            //canvas.drawCircle((float) cx, (float) cy, 10, paintzeg);
             Log.d("imagecanvas",String.valueOf(canvas.getWidth()));
             Log.d("imagecanvas",String.valueOf(canvas.getHeight()));
             runOnUiThread(new Runnable() {
@@ -355,6 +365,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         if (userIn) {
+            // canvas.drawBitmap(toLoc,(float) cx-10,(float) cy-10,null);
             canvas.drawCircle((float) cxuser, (float) cyuser, 10, paintuser);
             runOnUiThread(new Runnable() {
                 @Override

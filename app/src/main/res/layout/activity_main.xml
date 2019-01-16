@@ -88,8 +88,9 @@
 
                     <io.github.controlwear.virtual.joystick.android.JoystickView
                         android:id="@+id/js1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="480px"
+                        android:layout_height="480px"
+                        android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
                         android:visibility="invisible"
                         app:JV_backgroundColor="@color/background"
@@ -119,7 +120,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Manual" />
+                            android:text="Override controls" />
 
                         <android.support.design.widget.FloatingActionButton
                             android:id="@+id/manual"
@@ -143,7 +144,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Z Drive" />
+                            android:text="Ride Me" />
 
                         <android.support.design.widget.FloatingActionButton
                             android:id="@+id/autowithman"
@@ -192,7 +193,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Developper menu" />
+                            android:text="Developer menu" />
 
                         <android.support.design.widget.FloatingActionButton
                             android:id="@+id/dev"
